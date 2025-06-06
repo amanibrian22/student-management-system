@@ -59,6 +59,10 @@
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
+                        <div class="mb-4">
+                            <label for="password_confirmation" class="block text-sm text-gray-700 font-semibold mb-2">Confirm Password</label>
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="w-full p-2 border rounded-lg text-sm">
+                        </div>
                         <button type="submit" class="bg-blue-600 text-white px-4 py-4 rounded-lg bg-blue-700 hover:bg-blue-700 text-sm">Update Student</button>
                     </form>
                 </div>

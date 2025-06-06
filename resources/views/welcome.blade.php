@@ -12,7 +12,7 @@
             background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
         }
         .card-hover {
-            transition: all 0.3s ease;
+            transition: all 1.3s ease;
         }
         .card-hover:hover {
             transform: translateY(-5px);
@@ -236,29 +236,42 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">EduConnect</h3>
-                    <img src="/img/logo.jpg" alt="School Logo" class="h-12 w-12 mb-4">
-                    <p class="text-gray-400 text-sm">
+    <footer class="bg-gray-800 shadow-sm mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="flex flex-col items-center md:items-start">
+                    <div class="flex items-center mb-4">
+                        <img src="/img/logo.jpg" alt="School Logo" class="h-10 w-10 mr-3">
+                        <span class="text-xl font-bold text-blue-600">EduConnect</span>
+                    </div>
+                    <p class="text-gray-300 text-center md:text-left">
                         Empowering students, parents, and educators through technology.
                     </p>
                 </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
-                    <address class="text-gray-400 not-italic">
-                        <p class="mb-2">541 Kigamboni</p>
-                        <p class="mb-2">Dar es Salaam,</p>
-                        <p class="mb-2"></p>
-                        <p>Email: <a href="mailto:info@schoolsystem.com" class="hover:text-white">info@schoolsystem.com</a></p>
+                
+                <div class="flex flex-col items-center">
+                    <h3 class="text-lg font-semibold text-gray-300 mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-center">
+                        <li><a href="/" class="text-gray-300 hover:text-blue-600">Home</a></li>
+                        <li><a href="#announcements" class="text-gray-300 hover:text-blue-600">Announcements</a></li>
+                        <li><a href="#features" class="text-gray-300 hover:text-blue-600">Features</a></li>
+                        <li><a href="{{ route('login') }}" class="text-gray-300 hover:text-blue-600">Login</a></li>
+                    </ul>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-end">
+                    <h3 class="text-lg font-semibold text-gray-300 mb-4">Contact Us</h3>
+                    <address class="text-gray-300 not-italic text-center md:text-right">
+                        <p class="mb-1">541 Kigamboni</p>
+                        <p class="mb-1">Dar es Salaam</p>
+                        <p class="mb-1">Email: <a href="mailto:info@schoolsystem.com" class="text-blue-600 hover:underline">info@schoolsystem.com</a></p>
                     </address>
                 </div>
             </div>
-            <div class="mt-12 border-t border-gray-700 pt-8 text-center">
-                <p class="text-gray-400">
-                    © 2025 School Management Portal. All rights reserved.
+            
+            <div class="mt-8 pt-6 border-t border-gray-200 text-center">
+                <p class="text-gray-300 text-sm">
+                    © {{ date('Y') }} EduConnect School Portal. All rights reserved.
                 </p>
             </div>
         </div>

@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - AcademiTrack</title>
+    <title>Admin Login - EduConnect</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="/img/logo.jpg" type="image/x-icon">
 </head>
 <body class="bg-gray-100 flex items-center justify-center h-screen font-sans">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <div class="flex justify-center mb-6">
-            <img src="/images/logo.png" alt="AcademiTrack Logo" class="h-16 w-16 rounded-full">
+            <img src="/img/logo.jpg" alt="EduConnect Logo" class="h-16 w-16 rounded-full">
         </div>
         <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Admin Login</h2>
         @if ($errors->any())
