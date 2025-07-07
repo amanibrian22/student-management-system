@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PrivateAnnouncementNotification;
 use App\Models\PrivateAnnouncement;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PrivateAnnouncementController extends Controller
 {
@@ -30,7 +32,16 @@ class PrivateAnnouncementController extends Controller
             'posted_date' => 'required|date',
         ]);
 
-        PrivateAnnouncement::create($request->all());
+        $announcement = PrivateAnnouncement::create([
+            'student_id' => $request->student_id,
+            'title' => $request->title,
+            'content' => $request->content,
+            'posted_date' => $request->posted_date,
+        ]);
+
+        if ($announcement->student->email) {
+            Mail::to($announcement->student->email)->queue(new PrivateAnnouncementNotification($announcement));
+        }
 
         return redirect()->route('private_announcements.index')->with('success', 'Private Announcement created successfully.');
     }
@@ -50,7 +61,12 @@ class PrivateAnnouncementController extends Controller
             'posted_date' => 'required|date',
         ]);
 
-        $privateAnnouncement->update($request->all());
+        $privateAnnouncement->update([
+            'student_id' => $request->student_id,
+            'title' => $request->title,
+            'content' => $request->content,
+            'posted_date' => $request->posted_date,
+        ]);
 
         return redirect()->route('private_announcements.index')->with('success', 'Private Announcement updated successfully.');
     }

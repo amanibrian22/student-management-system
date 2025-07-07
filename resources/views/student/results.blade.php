@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results - AcademiTrack</title>
+    <title>My Results - AcademiTrack</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="img/logo.jpg" type="image/x-icon">
     <style>
-        .grade-A { background-color: #d1fae5; color: #065f46; }
-        .grade-B { background-color: #dbeafe; color: #1e40af; }
-        .grade-C { background-color: #fef3c7; color: #92400e; }
-        .grade-D { background-color: #fee2e2; color: #991b1b; }
-        .grade-F { background-color: #f3f4f6; color: #6b7280; }
+        .result-header {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+        .result-row:hover {
+            background-color: #f8fafc;
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
@@ -23,10 +24,10 @@
                 <div class="flex items-center justify-between mb-8">
                     <div>
                         <h1 class="text-2xl md:text-3xl font-bold text-gray-800">My Results</h1>
-                        <p class="text-gray-500 mt-1">Academic performance overview</p>
+                        <p class="text-gray-500 mt-1">Your academic performance records</p>
                     </div>
                     <div class="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center">
-                        <i class="fas fa-chart-line text-blue-600"></i>
+                        <i class="fas fa-clipboard-list text-blue-600"></i>
                     </div>
                 </div>
 
@@ -39,7 +40,7 @@
                     @else
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
+                                <thead class="result-header">
                                     <tr>
                                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Course</th>
                                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Grade</th>
@@ -49,29 +50,16 @@
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-100">
                                     @foreach($results as $result)
-                                    <tr class="hover:bg-gray-50">
+                                    <tr class="result-row">
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-gray-800 font-medium">{{ $result->course_name }}</div>
                                             <div class="text-gray-500 text-sm">{{ $result->course_code }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-3 py-1 rounded-full text-sm font-semibold grade-{{ $result->grade }}">{{ $result->grade }}</span>
+                                            <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">{{ $result->grade }}</span>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                <div class="w-16 bg-gray-200 rounded-full h-2 mr-2">
-                                                    <div class="bg-blue-500 h-2 rounded-full" style="width: {{ $result->percentage }}%"></div>
-                                                </div>
-                                                <span>{{ $result->percentage }}%</span>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-gray-500">
-                                            @if($result->exam_date instanceof \Illuminate\Support\Carbon)
-                                                {{ $result->exam_date->format('M d, Y') }}
-                                            @else
-                                                {{ $result->exam_date }}
-                                            @endif
-                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $result->percentage }}%</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $result->exam_date ? $result->exam_date->format('Y-m-d') : 'N/A' }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

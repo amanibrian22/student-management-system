@@ -6,22 +6,6 @@
     <title>Manage Results - AcademiTrack</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .grade-A { background-color: #d1fae5; color: #065f46; }
-        .grade-B { background-color: #dbeafe; color: #1e40af; }
-        .grade-C { background-color: #fef3c7; color: #92400e; }
-        .grade-D { background-color: #fee2e2; color: #991b1b; }
-        .grade-F { background-color: #f3f4f6; color: #6b7280; }
-        
-        .grade-badge {
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            font-weight: 600;
-            display: inline-block;
-            min-width: 1.5rem;
-            text-align: center;
-        }
-    </style>
 </head>
 <body class="bg-gray-50 font-sans">
     <div class="flex h-screen">
@@ -31,7 +15,7 @@
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
                     <div>
                         <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Manage Results</h1>
-                        <p class="text-gray-500 mt-1">Student academic performance</p>
+                        <p class="text-gray-500 mt-1">Student academic performance records</p>
                     </div>
                     <a href="{{ route('results.create') }}" class="mt-4 md:mt-0 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center">
                         <i class="fas fa-plus mr-2"></i> Add Result
@@ -73,33 +57,11 @@
                                 <tbody class="bg-white divide-y divide-gray-100">
                                     @foreach($results as $result)
                                     <tr class="hover:bg-gray-50">
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                <div class="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                                                    <i class="fas fa-user text-blue-600"></i>
-                                                </div>
-                                                <div class="text-sm font-medium text-gray-900">{{ $result->student->name }}</div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $result->course_name }} ({{ $result->course_code }})
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="grade-badge grade-{{ $result->grade }}">
-                                                {{ $result->grade }}
-                                            </span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <div class="flex items-center">
-                                                <div class="w-16 bg-gray-200 rounded-full h-2 mr-2">
-                                                    <div class="bg-blue-500 h-2 rounded-full" style="width: {{ $result->percentage }}%"></div>
-                                                </div>
-                                                <span>{{ $result->percentage }}%</span>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $result->exam_date }}
-                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $result->student->name ?? 'N/A' }} ({{ $result->student->student_id ?? 'N/A' }})</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $result->course_name }} ({{ $result->course_code }})</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $result->grade }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $result->percentage }}%</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $result->exam_date ? $result->exam_date->format('Y-m-d') : 'N/A' }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <div class="flex justify-end space-x-2">
                                                 <a href="{{ route('results.edit', $result) }}" class="text-blue-600 hover:text-blue-900" title="Edit">

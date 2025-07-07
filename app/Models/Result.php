@@ -10,11 +10,11 @@ class Result extends Model
     protected $fillable = ['student_id', 'course_code', 'course_name', 'grade', 'percentage', 'exam_date'];
 
     protected $casts = [
-        'exam_date' => 'datetime',
+        'exam_date' => 'date',
     ];
 
     public function student()
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(Student::class, 'student_id');
     }
 }

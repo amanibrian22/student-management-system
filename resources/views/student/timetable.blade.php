@@ -24,7 +24,7 @@
                 <div class="flex items-center justify-between mb-8">
                     <div>
                         <h1 class="text-2xl md:text-3xl font-bold text-gray-800">My Timetable</h1>
-                        <p class="text-gray-500 mt-1">Weekly class schedule</p>
+                        <p class="text-gray-500 mt-1">Weekly class schedule for {{ Auth::user()->student->class }}</p>
                     </div>
                     <div class="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center">
                         <i class="fas fa-calendar-alt text-blue-600"></i>
@@ -35,7 +35,7 @@
                     @if($timetables->isEmpty())
                         <div class="p-8 text-center">
                             <i class="fas fa-calendar-times text-4xl text-gray-300 mb-4"></i>
-                            <p class="text-gray-500">No timetable entries found</p>
+                            <p class="text-gray-500">No timetable entries found for your class</p>
                         </div>
                     @else
                         <div class="overflow-x-auto">

@@ -23,9 +23,6 @@
             <a href="{{ route('announcements') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-md {{ request()->routeIs('announcements') ? 'bg-blue-700 text-white' : 'text-blue-100 hover:bg-blue-700 hover:text-white' }}">
                 <i class="fas fa-bullhorn mr-3"></i> Announcements
             </a>
-            <a href="{{ route('notifications') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-md {{ request()->routeIs('notifications') ? 'bg-blue-700 text-white' : 'text-blue-100 hover:bg-blue-700 hover:text-white' }}">
-                <i class="fas fa-bell mr-3"></i> Notifications
-            </a>
             <a href="{{ route('feedback') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-md {{ request()->routeIs('feedback') ? 'bg-blue-700 text-white' : 'text-blue-100 hover:bg-blue-700 hover:text-white' }}">
                 <i class="fas fa-comment mr-3"></i> Feedback
             </a>

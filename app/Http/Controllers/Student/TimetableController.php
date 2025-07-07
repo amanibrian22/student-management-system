@@ -10,7 +10,7 @@ class TimetableController extends Controller
     public function index()
     {
         $student = Auth::user()->student;
-        $timetables = $student->timetable()->orderBy('day_of_week')->get();
+        $timetables = \App\Models\Timetable::where('class', $student->class)->orderBy('day_of_week')->get();
         return view('student.timetable', compact('timetables'));
     }
 }

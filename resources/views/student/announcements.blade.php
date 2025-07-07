@@ -60,14 +60,9 @@
                                             </div>
                                             <div class="flex-1">
                                                 <h3 class="font-medium text-gray-800">{{ $announcement->title }}</h3>
-                                                <p class="text-gray-600 mt-1">{{ $announcement->content }}</p>
+                                                <p class="text-gray-600 mt-1">{!! nl2br(e($announcement->content)) !!}</p>
                                                 <div class="mt-2 text-xs text-gray-500">
-                                                    <i class="far fa-clock mr-1"></i> Posted: 
-                                                    @if($announcement->posted_date instanceof \Illuminate\Support\Carbon)
-                                                        {{ $announcement->posted_date->format('M d, Y \a\t h:i A') }}
-                                                    @else
-                                                        {{ $announcement->posted_date }}
-                                                    @endif
+                                                    <i class="far fa-clock mr-1"></i> Posted: {{ $announcement->posted_date->format('M d, Y \a\t h:i A') }}
                                                 </div>
                                             </div>
                                         </div>
@@ -102,14 +97,9 @@
                                             </div>
                                             <div class="flex-1">
                                                 <h3 class="font-medium text-gray-800">{{ $pa->title }}</h3>
-                                                <p class="text-gray-600 mt-1">{{ $pa->content }}</p>
+                                                <p class="text-gray-600 mt-1">{!! nl2br(e($pa->content)) !!}</p>
                                                 <div class="mt-2 text-xs text-gray-500">
-                                                    <i class="far fa-clock mr-1"></i> Posted: 
-                                                    @if($pa->posted_date instanceof \Illuminate\Support\Carbon)
-                                                        {{ $pa->posted_date->format('M d, Y \a\t h:i A') }}
-                                                    @else
-                                                        {{ $pa->posted_date }}
-                                                    @endif
+                                                    <i class="far fa-clock mr-1"></i> Posted: {{ $pa->posted_date->format('M d, Y \a\t h:i A') }}
                                                 </div>
                                             </div>
                                         </div>

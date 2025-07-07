@@ -32,6 +32,7 @@
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Student</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Submitted At</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Read</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Reply</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Actions</th>
                                 </tr>
                             </thead>
@@ -42,6 +43,7 @@
                                         <td class="px-4 py-2 text-sm text-gray-800">{{ $feedbackItem->student->name ?? 'N/A' }}</td>
                                         <td class="px-4 py-2 text-sm text-gray-800">{{ $feedbackItem->submitted_at->format('M d, Y') }}</td>
                                         <td class="px-4 py-2 text-sm text-gray-800">{{ $feedbackItem->read ? 'Yes' : 'No' }}</td>
+                                        <td class="px-4 py-2 text-sm text-gray-800">{{ $feedbackItem->reply ? \Illuminate\Support\Str::limit($feedbackItem->reply, 50) : 'No reply' }}</td>
                                         <td class="px-4 py-2 text-sm">
                                             <a href="{{ route('admin.feedback.edit', $feedbackItem) }}" class="text-blue-600 hover:text-blue-500 mr-2"><i class="fas fa-edit"></i></a>
                                             <form action="{{ route('admin.feedback.destroy', $feedbackItem) }}" method="POST" class="inline">
@@ -55,6 +57,7 @@
                                                     <button type="submit" class="text-green-600 hover:text-green-500 mr-2"><i class="fas fa-check"></i></button>
                                                 </form>
                                             @endif
+                                            <a href="{{ route('admin.feedback.reply', $feedbackItem) }}" class="text-purple-600 hover:text-purple-500 mr-2"><i class="fas fa-reply"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -22,12 +22,12 @@
                             <select name="student_id" id="student_id" class="w-full p-2 border rounded-lg text-sm" required>
                                 <option value="">Select Student</option>
                                 @foreach($students as $student)
-                                    <option value="{{ $student->id }}" {{ $student->id == $privateAnnouncement->student_id ? 'selected' : '' }}>{{ $student->name }} ({{ $student->student_id }})</option>
+                                    <option value="{{ $student->id }}" {{ old('student_id', $privateAnnouncement->student_id) == $student->id ? 'selected' : '' }}>{{ $student->name }} ({{ $student->student_id }})</option>
                                 @endforeach
                             </select>
                             @error('student_id')
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
-                            @error('student_id')
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="title" class="block text-sm text-gray-700 font-semibold mb-2">Title</label>
@@ -38,19 +38,19 @@
                         </div>
                         <div class="mb-4">
                             <label for="content" class="block text-sm text-gray-700 font-semibold mb-2">Content</label>
-                            <textarea name="content" id="content" class="w-full p-2 border rounded-lg text-sm" rows="5" required>{{ old('content', $privateAnnouncement->content) }}</textarea>
+                            <textarea name="content" id="content" class="w-full p-2 border rounded-lg text-sm" rows="6" required>{{ old('content', $privateAnnouncement->content) }}</textarea>
                             @error('content')
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="mb-4">
                             <label for="posted_date" class="block text-sm text-gray-700 font-semibold mb-2">Posted Date</label>
-                            <input type="date" name="posted_date" id="posted_date" class="w-full p-2 border rounded-lg text-sm" value="{{ old('posted_date', $privateAnnouncement->posted_date) }}" required>
+                            <input type="date" name="posted_date" id="posted_date" class="w-full p-2 border rounded-lg text-sm" value="{{ old('posted_date', $privateAnnouncement->posted_date->format('Y-m-d')) }}" required>
                             @error('posted_date')
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
-                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm">Update Private Announcement</button>
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm">Update Announcement</button>
                         <a href="{{ route('private_announcements.index') }}" class="ml-4 text-gray-600 hover:text-gray-800 text-sm">Cancel</a>
                     </form>
                 </div>

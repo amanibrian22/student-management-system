@@ -31,40 +31,41 @@
                         </div>
                         <div class="mb-4">
                             <label for="course_code" class="block text-sm text-gray-700 font-semibold mb-2">Course Code</label>
-                            <input type="text" name="course_code" id="course_code" class="w-full p-2 border rounded-lg text-sm" value="{{ $result->course_code }}" maxlength="10" required>
+                            <input type="text" name="course_code" id="course_code" class="w-full p-2 border rounded-lg text-sm" value="{{ old('course_code', $result->course_code) }}" maxlength="10" required>
                             @error('course_code')
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="mb-4">
                             <label for="course_name" class="block text-sm text-gray-700 font-semibold mb-2">Course Name</label>
-                            <input type="text" name="course_name" id="course_name" class="w-full p-2 border rounded-lg text-sm" value="{{ $result->course_name }}" required>
+                            <input type="text" name="course_name" id="course_name" class="w-full p-2 border rounded-lg text-sm" value="{{ old('course_name', $result->course_name) }}" required>
                             @error('course_name')
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="mb-4">
                             <label for="grade" class="block text-sm text-gray-700 font-semibold mb-2">Grade</label>
-                            <input type="text" name="grade" id="grade" class="w-full p-2 border rounded-lg text-sm" value="{{ $result->grade }}" maxlength="5" required>
+                            <input type="text" name="grade" id="grade" class="w-full p-2 border rounded-lg text-sm" value="{{ old('grade', $result->grade) }}" maxlength="5" required>
                             @error('grade')
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="mb-4">
                             <label for="percentage" class="block text-sm text-gray-700 font-semibold mb-2">Percentage</label>
-                            <input type="number" name="percentage" id="percentage" class="w-full p-2 border rounded-lg text-sm" value="{{ $result->percentage }}" min="0" max="100" step="0.01" required>
+                            <input type="number" name="percentage" id="percentage" class="w-full p-2 border rounded-lg text-sm" value="{{ old('percentage', $result->percentage) }}" min="0" max="100" step="0.01" required>
                             @error('percentage')
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="mb-4">
                             <label for="exam_date" class="block text-sm text-gray-700 font-semibold mb-2">Exam Date</label>
-                            <input type="date" name="exam_date" id="exam_date" class="w-full p-2 border rounded-lg text-sm" value="{{ $result->exam_date }}" required>
+                            <input type="date" name="exam_date" id="exam_date" class="w-full p-2 border rounded-lg text-sm" value="{{ old('exam_date', $result->exam_date ? $result->exam_date->format('Y-m-d') : '') }}" required>
                             @error('exam_date')
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                         <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm">Update Result</button>
+                        <a href="{{ route('results.index') }}" class="ml-4 text-gray-600 hover:text-gray-800 text-sm">Cancel</a>
                     </form>
                 </div>
             </main>

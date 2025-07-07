@@ -7,53 +7,76 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-50 font-sans">
     <div class="flex h-screen">
         @include('admin.sidebar')
         <div class="flex flex-col flex-1 overflow-hidden">
-            <main class="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-100">
-                <div class="flex justify-between items-center mb-6">
-                    <h1 class="text-2xl font-bold text-gray-800">Manage Private Announcements</h1>
-                    <a href="{{ route('private_announcements.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm">Add Private Announcement</a>
+            <main class="flex-1 overflow-y-auto p-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Manage Private Announcements</h1>
+                        <p class="text-gray-500 mt-1">Student-specific announcements</p>
+                    </div>
+                    <a href="{{ route('private_announcements.create') }}" class="mt-4 md:mt-0 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center">
+                        <i class="fas fa-plus mr-2"></i> Add Private Announcement
+                    </a>
                 </div>
+
                 @if (session('success'))
-                    <div class="bg-green-100 text-green-700 p-4 rounded mb-4 text-sm">
-                        {{ session('success') }}
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 text-green-500">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-green-700">{{ session('success') }}</p>
+                            </div>
+                        </div>
                     </div>
                 @endif
-                <div class="bg-white rounded-lg shadow-sm p-6">
+
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
                     @if($privateAnnouncements->isEmpty())
-                        <p class="text-gray-600 text-sm">No private announcements found.</p>
+                        <div class="p-8 text-center">
+                            <i class="fas fa-bullhorn text-4xl text-gray-300 mb-4"></i>
+                            <p class="text-gray-500">No private announcements found</p>
+                        </div>
                     @else
-                        <table class="min-w-full">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2 text-left text-sm text-gray-600">Student</th>
-                                    <th class="px-4 py-2 text-left text-sm text-gray-600">Title</th>
-                                    <th class="px-4 py-2 text-left text-sm text-gray-600">Content</th>
-                                    <th class="px-4 py-2 text-left text-sm text-gray-600">Posted Date</th>
-                                    <th class="px-4 py-2 text-left text-sm text-gray-600">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($privateAnnouncements as $privateAnnouncement)
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
                                     <tr>
-                                        <td class="px-4 py-2 text-sm">{{ $privateAnnouncement->student->name }}</td>
-                                        <td class="px-4 py-2 text-sm">{{ $privateAnnouncement->title }}</td>
-                                        <td class="px-4 py-2 text-sm">{{ \Illuminate\Support\Str::limit($privateAnnouncement->content, 50) }}</td>
-                                        <td class="px-4 py-2 text-sm">{{ $privateAnnouncement->posted_date }}</td>
-                                        <td class="px-4 py-2 text-sm">
-                                            <a href="{{ route('private_announcements.edit', $privateAnnouncement) }}" class="text-blue-600 hover:text-blue-500 mr-2"><i class="fas fa-edit"></i></a>
-                                            <form action="{{ route('private_announcements.destroy', $privateAnnouncement) }}" method="POST" class="inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-red-600 hover:text-red-500" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></button>
-                                            </form>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Student</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Posted On</th>
+                                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-100">
+                                    @foreach($privateAnnouncements as $announcement)
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $announcement->student->name ?? 'N/A' }} ({{ $announcement->student->student_id ?? 'N/A' }})</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $announcement->title }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $announcement->posted_date->format('Y-m-d') }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <div class="flex justify-end space-x-2">
+                                                <a href="{{ route('private_announcements.edit', $announcement) }}" class="text-blue-600 hover:text-blue-900" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <form action="{{ route('private_announcements.destroy', $announcement) }}" method="POST" class="inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-red-600 hover:text-red-900" title="Delete" onclick="return confirm('Are you sure you want to delete this announcement?')">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     @endif
                 </div>
             </main>

@@ -13,7 +13,6 @@
             font-size: 0.75rem;
             font-weight: 500;
         }
-        
         .day-monday { background-color: #dbeafe; color: #1d4ed8; }
         .day-tuesday { background-color: #e9d5ff; color: #7e22ce; }
         .day-wednesday { background-color: #fef3c7; color: #b45309; }
@@ -63,24 +62,28 @@
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Class</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Day</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
                                         <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-100">
                                     @foreach($timetables as $timetable)
                                     <tr class="hover:bg-gray-50">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $timetable->class_name ?? 'N/A' }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $timetable->subject }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $timetable->class }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $timetable->course_name }} ({{ $timetable->course_code }})</td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="day-badge day-{{ strtolower($timetable->day) }}">
-                                                {{ $timetable->day }}
+                                            <span class="day-badge day-{{ strtolower($timetable->day_of_week) }}">
+                                                {{ $timetable->day_of_week }}
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             {{ $timetable->start_time }} - {{ $timetable->end_time }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ $timetable->location }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <div class="flex justify-end space-x-2">

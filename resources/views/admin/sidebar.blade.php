@@ -26,10 +26,7 @@
             <a href="{{ route('private_announcements.index') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('private_announcements.*') ? 'bg-blue-700 text-white' : 'text-blue-100 hover:bg-blue-700 hover:text-white' }}">
                 <i class="fas fa-lock mr-3"></i> Private Announcements
             </a>
-            {{-- <a href="{{ route('notifications.index') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('notifications.*') ? 'bg-blue-700 text-white' : 'text-blue-100 hover:bg-blue-700 hover:text-white' }}">
-                <i class="fas fa-bell mr-3"></i> Notifications
-            </a>
-            <a href="{{ route('feedback.index') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('feedback.*') ? 'bg-blue-700 text-white' : 'text-blue-100 hover:bg-blue-700 hover:text-white' }}">
+            {{-- <a href="{{ route('admin.feedback.index') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('admin.feedback.*') ? 'bg-blue-700 text-white' : 'text-blue-100 hover:bg-blue-700 hover:text-white' }}">
                 <i class="fas fa-comment mr-3"></i> Feedback
             </a> --}}
         </nav>
